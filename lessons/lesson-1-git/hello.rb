@@ -4,3 +4,4 @@ puts "Test vim"
 puts "Hello CDG Students"
 puts "for diff"
 puts 'Hello CDG students!'
+puts 'Test'
