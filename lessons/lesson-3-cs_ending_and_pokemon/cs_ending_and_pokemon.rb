@@ -4,7 +4,7 @@
 #цифру 2 в степени (длины введенного слова), если не заканчивается
 # - выводит слово задом наперед
 def cs_ending(word)
-    if word.to_s.slice(-2,2).downcase == "cs"
+    if word.slice(-2,2).downcase == "cs"
         puts 2**word.length
     else
         puts word.reverse
@@ -20,19 +20,19 @@ cs_ending("YellowCS")
 #[{ name: ‘Pikachu’, color: ‘Yellow’ }, … n times{}]
  def pokemon
     puts "Привет, сколько добавить покемонов?"
-    quantity = gets.chomp().to_i
-    while quantity.zero? || quantity < 0
+    quantity = gets.chomp.to_i
+    while quantity < 1
         puts "Пожалуйста, введите положительное число покемонов"
-        quantity = gets.chomp().to_i
+        quantity = gets.chomp.to_i
     end
     hash_pokemons = []
     n = 1
     while n <= quantity
         your_pokemons = {}
         puts "Скажи, как зовут твоего покемона #{n}?"
-        name = gets.chomp() 
+        name = gets.chomp 
         puts "Какого цвета покемон #{n}?"
-        color = gets.chomp() 
+        color = gets.chomp
         your_pokemons[:name] = name
         your_pokemons[:color] = color
         hash_pokemons << your_pokemons
