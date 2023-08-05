@@ -27,20 +27,19 @@ def print_results_file
     pp results_file.readlines.map(&:chomp)
     results_file.close
 end   
-
-#запрос возраста студента
+ 
+def numeric?(value)
+    Integer(value) rescue false
+  end
+#запрос возраста студента и проверка на существование такого возраста в файле   
 def age_student    
     puts "Введите возраст студента. Для завершения программы введите -1"
-    @age_correct = gets.chomp.to_i
+    @age_correct = gets.chomp.to_s
     if @age_correct === -1
         pp "print_results_file из age_student"#удалить pp после решения проблемы
         print_results_file
         #return break не подходит.Как остановить метод students ? и не выводить второй раз массив из print_results_file
-    elsif @age_correct < 1 #$age_correct.zero?|| age_correct < 0
-        puts "Некорректный ввод возраста. Необходимо положительное число."
-        age_student
-    #Проверка на существование такого возраста
-    else 
+    elsif (numeric?(@age_correct) && @age_correct.to_i > 0)
         @arr_students = IO.readlines(FILE_students)
         @age = @age_correct
         if (!@arr_students.grep(/#{@age}/).empty? && @arr_students_scan.grep(/#{@age}/).empty?)
@@ -48,10 +47,14 @@ def age_student
         elsif (@arr_students.grep(/#{@age}/).empty? && @arr_students_scan.grep(/#{@age}/).empty?)
             p "Студента возрастом #{@age} нет в файле \'#{FILE_students}\'"
         elsif (!@arr_students.grep(/#{@age}/).empty? && !@arr_students_scan.grep(/#{@age}/).empty?)
-        p "Возраст подходит"#Нужна ли запись "Возраст подходит"
+        p "Возраст подходит"#Нужна ли ЭТА запись 
         else
         p "1011"#удалить pp после решения проблемы
-        end
+    end    
+    else 
+        puts "Некорректный ввод возраста. Необходимо положительное число."
+        age_student
+        
     end   
 end
 
