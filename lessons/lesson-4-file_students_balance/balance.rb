@@ -124,6 +124,9 @@ end
 
 def quit
     File.write(FILE, @current_balance)
+
+
+    
 end
 
 start
