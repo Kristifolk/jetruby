@@ -119,14 +119,12 @@ def withdraw
 end
 
 def balance
-    puts "Баланс " + @current_balance   
+    puts "Баланс #{@current_balance}" 
 end
 
 def quit
     File.write(FILE, @current_balance)
-
-
-    
+    return
 end
 
 start

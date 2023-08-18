@@ -26,6 +26,7 @@ def print_results_file
     results_file = File.open(FILE_RESULTS)
     pp results_file.readlines.map(&:chomp)
     results_file.close
+    exit(true)# остановить выполнение всего кода после
 end   
  
 def numeric?(value)
@@ -35,8 +36,7 @@ def numeric?(value)
 def age_student    
     puts "Введите возраст студента. Для завершения программы введите -1"
     @age_correct = gets.chomp.to_s
-    if @age_correct === -1
-        pp "print_results_file из age_student"#удалить pp после решения проблемы
+    if @age_correct === "-1"
         print_results_file
         #return break не подходит.Как остановить метод students ? и не выводить второй раз массив из print_results_file
     elsif (numeric?(@age_correct) && @age_correct.to_i > 0)
@@ -62,7 +62,7 @@ def students
     i = 1
     while i <= @arr_students_scan.length 
         age_student
-        break if @age_correct === -1
+        break if @age_correct === "-1"
         a = @age.to_s 
         @arr_students_scan.each do |item|
             if item.include?(a)
@@ -76,7 +76,6 @@ def students
         i += 1
         break if @arr_students_scan.length === 0
     end
-    p "print_results_file Из students: "
     print_results_file  
     
 end
