@@ -60,7 +60,7 @@ class PostsController
   #должен возвращать все посты из памяти и их индекс в массиве (прим. 0. Hello World \n 1. Hello (again))
   def all_posts_and_id  
     no_posts
-    if 
+    if @posts.length > 0
       for i in 0..@posts.length - 1
         puts "#{i}. #{@posts[i]}"
       end
@@ -90,6 +90,15 @@ class PostsController
     end  
   end
 
+  def request_post_id_show_it #может метод избыточен и вся логика должна быть в show?
+    if no_posts == false
+      return 
+    else
+      request_post_id 
+      show_post_id(@id_post)
+      return
+    end 
+  end 
 
   #должен запрашивать текст поста
   def request_text
@@ -105,16 +114,7 @@ class PostsController
   end
   #GET show - должен запрашивать идентификатор поста и показывать пост по переданному идентификатору (как в index только 1 пост)
   def show 
-    puts 'show'
-    def request_post_id_show_it #может метод избыточен и вся логика должна быть в show?
-      if no_posts == false
-        return 
-      else
-        request_post_id 
-        show_post_id(@id_post)
-        return
-      end 
-    end
+    puts 'show'   
     request_post_id_show_it
   end
 

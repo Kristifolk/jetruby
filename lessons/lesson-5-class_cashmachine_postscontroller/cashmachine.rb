@@ -27,9 +27,10 @@
 class CashMachine
     attr_accessor :file
     FILE = "balance.txt"
-    CURRENT_BALANCE =  File.exist?(FILE) ? File.read(FILE).split("\n") : "null"
+    STARTING_BALANCE = "100" 
 
-    def initialize(file = FILE)#  где ставится значение по умолчанию?
+    def initialize(file = FILE)
+        File.exist?(FILE) ? File.read(FILE).split("\n") : STARTING_BALANCE # если FILE = "balance.txt" не существует, стартовый баланс 100.0
         @file = file
     end
 
@@ -39,7 +40,7 @@ class CashMachine
             puts "Баланс " + @current_balance
             question
         else
-            File.write("balance.txt", "100.0")
+            File.write("balance.txt", STARTING_BALANCE)
             @current_balance = File.read("balance.txt")
             puts "Баланс " + @current_balance
             question
@@ -54,29 +55,7 @@ class CashMachine
             проверить баланс: B
             выйти: Q" 
         @user_letter = gets.chomp.downcase
-        #Проверка на ввод одной англ. буквы "d" || "b" || "q" || "w"
-        #Как компактнее записать условие?
-        if (@user_letter.length == 1 && @user_letter.match?(/[A-Za-z]/))#рег.выражение Это англ.буква? почему не работает .is_alphabetic?
-            if @user_letter === "d" || @user_letter === "b" || @user_letter === "q" || @user_letter === "w"
-                @atm_operations =  @user_letter
-                atm
-            else
-                puts "Ошибочный ввод данных.
-            Попробуйте снова, переключите на английскую раскладку на клавиатуре.
-            Далее введите соответствующую букву"
-                question
-            end
-        else
-            puts "Ошибочный ввод данных.
-            Попробуйте снова, переключите на английскую раскладку на клавиатуре.
-            Далее введите соответствующую букву"
-            question
-        end
-        return
-    end
-
-    def atm
-        case @atm_operations
+        case @user_letter
         when "d"
             deposit    
             question
@@ -87,11 +66,16 @@ class CashMachine
             balance
             question  
         question
-        else "q"
+        when "q"
             quit
+        else 
+            puts "Ошибочный ввод данных.
+            Попробуйте снова, переключите на английскую раскладку на клавиатуре.
+            Далее введите соответствующую букву"
+            question
         end
     end
-
+    
     #пользовательский ввод положительное число целое или с плавающей точкой 
     def numeric?(value)
         Integer(value) rescue false
