@@ -1,16 +1,3 @@
-#lesson-7-http по вашей нумерации  lesson-6
-
-=begin
-Задание 1
- Переписать банкомат из ЛЗ #4 (класс CashMachine) на работу с веб сервером. 
-Необходимо заменить ввод и вывод данных (по условию изначальной задачи) на запросы, вместо работы с консолью.
-
-GET /deposit?value=
-GET /withdraw?value=
-GET /balance
-
-=end
-
 require 'socket'
 require 'rack'
 require 'rack/utils'

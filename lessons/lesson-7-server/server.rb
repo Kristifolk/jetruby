@@ -12,41 +12,44 @@ GET /balance
 =end
 
 require 'socket'
-server = TCPServer.new('0.0.0.0', 3001)#
+require 'rack/utils'# ?
+require './app'
+
+app = App.new
+
+server = TCPServer.new('0.0.0.0', 3002)
 
 while connection = server.accept
-    request = connection.gets#запрос Get
+    request = connection.gets
 
-    method, full_path, protocol = request.split(" ")#ПРи выводи разделить данные выводить с новой строки GET /user HTTP/1.1 
+    method, full_path = request.split(" ")#ПРи выводи разделить данные выводить с новой строки GET /user HTTP/1.1 
     
     path, params = full_path.split("?")
 
-    puts method
-    puts path
-    puts protocol
-    puts params
+    #params = params.split("&").map{ |pair| pair.split("=") }.to_h
 
-    response = case path
-    when "/"
-        "Hello, word!"
-    when "/user"
-        "Hello, user!"
-    else
-        "404"
-    end
+#    puts method
+#    puts path
+#    puts protocol
+#    puts params
 
-    status = response == "404" ? "404" : "200" #если 404 вернуть 404 иначе 200
+status, headers, body, = app.call({
+    "REQUEST_METHOD" => method,
+    "PATH_INFO" => path,
+    "QUERY_STRING" => params
+})
 
+#    response = router(path, params)
+#    status = response == "404" ? "404" : "200" #если 404 вернуть 404 иначе 200/Убрали так как status будет возращаться rack приложением
 
-    puts "Сервер запущен"#удалить
-  #request = connection.gets
-  #method, full_path = request.split(' ')
-  #path = full_path.split('?')[0]
-
-  connection.print "HTTP/1.1 #{status}\r\n "#версия, код
-  connection.print "Content-Type: text/html\r\n"
+  connection.print "HTTP/1.1 #{status}\r\n "#версия, статус код
+  headers.each do |key, value|
+    connection.puts "#{key}: #{value}; charset=UTF-8\r\n" #кодировка русский текст неработает :(
+  end
   connection.print "\r\n"# пустая строка
-  connection.print response
+  body.each do |part|
+    connection.print part
+  end
 
   connection.close
 end
