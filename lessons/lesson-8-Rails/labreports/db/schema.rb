@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_17_183351) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_095147) do
+  create_table "grades", force: :cascade do |t|
+    t.string "grade"
+    t.string "save"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "labreports", force: :cascade do |t|
-    t.string "user_id"
     t.string "number_report"
     t.text "title"
     t.text "description"
     t.text "file_name"
     t.string "grade"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_labreports_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

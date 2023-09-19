@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :labreports#у одного user много лаб.работ
+    has_many :labreports #у одного user много лаб.работ
 
     validates :first_name, presence: true, length: {maximum: 100 }
     validates :last_name, presence: true, length: {maximum: 100 }

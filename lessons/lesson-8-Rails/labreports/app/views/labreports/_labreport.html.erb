@@ -1,0 +1,23 @@
+<div id="<%= dom_id labreport %>">
+ 
+    <h3>
+    <strong>Title: <%= labreport.title %> </strong>
+    </h3>
+
+    <p>
+    <i>User: <%= labreport.user.first_name %> <%= labreport.user.last_name %>  email  <%= labreport.user.email %></i>
+    </p>
+
+    <p>
+    <%= labreport.description %>
+    </p>
+
+    <p>
+    <strong>Number report: <%= labreport.number_report %> </strong>
+    </p>
+
+    <p>
+    <strong>File name: <%= labreport.file_name %> </strong>
+    </p>
+
+</div>

@@ -1,0 +1,42 @@
+<%= form_with(model: labreport) do |form| %>
+  <% if labreport.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(labreport.errors.count, "error") %> prohibited this labreport from being saved:</h2>
+
+      <ul>
+        <% labreport.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :number_report, style: "display: block" %>
+    <%= form.text_field :number_report %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_area :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :file_name, style: "display: block" %>
+    <%= form.text_area :file_name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
