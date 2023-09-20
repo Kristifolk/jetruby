@@ -1,0 +1,30 @@
+Как сделать button, чтобы вела на нужную страницу,а не саму себя? Выдает метод post, прописать get не удалось.
+
+index.html.erb
+<p style="color: green"><%= notice %></p>
+
+<h1>Labs reports</h1>
+
+<%= button_to  "Add report", action: "new", method: "get" %>#страница переходит на саму себя, метод post не переходит на new страницу 
+<%= button_to "Add report", new_labreport_path, form_options: { method: "get" } %>#страница переходит на саму себя, метод post не переходит на new страницу 
+<%= button_to "Add report", new_labreport_path, form_options: { method: :get } %>#страница переходит на саму себя, метод post не переходит на new страницу 
+<%= link_to "Add report", action: "new"  %>#переходит на нужную страницу
+<%= link_to "Add report", new_labreport_path %>#тоже самое, переходит на нужную страницу
+
+<div id="labreports">
+  <% @labreports.each do |labreport| %>
+    <%= render labreport %>
+    <p>
+      <%= link_to "Show this labreport", labreport %>
+      <%= pp(111)
+      pp(labreport) %>
+    </p>
+  <% end %>
+</div>
+
+Rails.application.routes.draw do
+  resources :grades
+  resources :labreports
+  get 'labreports/new', to: 'labreports#new'#добавили
+
+end
