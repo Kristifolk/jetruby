@@ -1,6 +1,5 @@
 class Labreport < ApplicationRecord
     belongs_to :user #у одной лабораторной работы один user
-    has_one :grade #у одной лабораторной работы одна оценка
 
     validates :title, presence: true, length: {maximum: 250 }
     validates :description, presence: true, length: {maximum: 500 }

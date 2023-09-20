@@ -1,0 +1,14 @@
+<%= form_with(model: labreport) do |form| %>
+
+
+  <div>
+    <%= form.label :grade, style: "display: block" %>
+    <%= form.text_field :grade %>
+  </div>
+
+  
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

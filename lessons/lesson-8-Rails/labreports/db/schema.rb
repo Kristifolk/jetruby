@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_095147) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_122130) do
   create_table "grades", force: :cascade do |t|
-    t.string "grade"
+    t.text "grade"
     t.string "save"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

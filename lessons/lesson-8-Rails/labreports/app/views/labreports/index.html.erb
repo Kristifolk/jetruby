@@ -9,10 +9,17 @@
 <div id="labreports">
   <% @labreports.each do |labreport| %>
     <%= render labreport %>
-    <p>
-        <%= link_to "Add mark", action: "grades" %>
-        <%= link_to "Show this labreport", labreport %>
-    </p>
+    <% if labreport.grade == nil %>
+        <p>
+            <a href="/labreports/<%=labreport.id%>/mark">Add mark</a>
+            <%= link_to "Show this labreport", labreport %>
+        </p>
+    <% else %>
+        <p>
+            <strong>Mark: <%= labreport.grade %> </strong>
+            <%= link_to "Show this labreport", labreport %>
+        </p>
+    <% end %>
   <% end %>
 </div>
 
