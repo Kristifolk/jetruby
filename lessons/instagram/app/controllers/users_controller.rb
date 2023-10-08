@@ -19,14 +19,13 @@ class UsersController < ApplicationController
   def edit
   end
 
-  
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html {redirect_to root_path, notice: "You have successfully registered." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -1,7 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>My posts</h1>
+<h1>All posts</h1>
+<p>
+<%= link_to "Sign in", users_path %>
+</p>
+<p>
+<%= link_to "Registration", new_user_path %>
+</p>
+<p>
 <%= link_to "New post", new_post_path %>
+</p>
+
 
 <div id="posts">
   <% @posts.each do |post| %>
