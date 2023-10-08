@@ -1,0 +1,28 @@
+<div id="<%= dom_id post %>">
+    <p>
+        <strong> <%= post.user.first_name%> <%= post.user.last_name%> </strong>
+    </p>
+    
+    <p>
+        <%= image_tag post.img_name.url %>
+    </p>
+   
+    <p>
+        <strong>Description:</strong>
+        <%= post.description %>
+    </p>
+
+    <!-- модель post связана с моделью like, в таблице likes есть столбец like используется для хранения информации о дизлайках(0),лайках(1) и null(ничего не выбрано). Значение true означает, что лайк является лайком, а значение false означает, что лайк является дизлайком -->
+    <p>
+        <strong>Like:</strong>
+        <%= post.likes.where(like: true).count %>
+
+        <strong>Dislike:</strong>
+        <%= post.likes.where(like: false).count %>
+    <p>
+        <strong>Comments:</strong>
+        <%= post.comments.count %>
+        <%= link_to 'Show comments', comments_path(post_id: post.id) %>
+    </p>
+
+</div>
