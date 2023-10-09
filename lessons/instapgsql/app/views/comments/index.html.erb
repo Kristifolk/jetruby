@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+
+    <p style="color: green"><%= notice %></p>
+
+    <h1>Comments</h1>
+    <p>
+        <%= link_to "New comment", new_comment_path(post_id: params[:post_id] ) %>
+        <%= link_to "Back to main", root_path %>
+    </p>
+    <div id="comments">
+        <% @comments.each do |comment| %>
+            <%= render comment %>
+                <% if comment.user == current_user %>
+                    <p>
+                    <%= link_to "Show this comment", comment %>
+                    </p>
+                <% end %>
+        <% end %>
+    </div>
+
+
+<% else %>
+  <h1>Home</h1>
+  <%= link_to 'Sign in', new_user_session_path %>
+<% end %>
+
+

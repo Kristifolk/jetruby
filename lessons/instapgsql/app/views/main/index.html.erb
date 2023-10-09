@@ -1,0 +1,56 @@
+<% if user_signed_in? %>
+  <h1>Welcome instagram, <%= current_user.first_name %></h1>
+  <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+   <%= link_to "My post", posts_path %>
+   <h2>All Posts</h2>
+
+    <div id="posts">
+        <% @posts.each do |post| %>
+            <div id="<%= dom_id post %>">
+                <p>
+                     <strong> <%= post.user.first_name%> <%= post.user.last_name%> </strong>
+
+                    <%= 
+                        link_to @friends.where(user_id: current_user, friendly_unfriendly: post.user_id).count == 0 ? "Make friends" : "You're a friend. Unsubscribe"  , 
+                        friendly_post_path(post.user_id)
+                    %>
+                </p> 
+               <p>
+                    <%= image_tag post.img_name.url %>
+                   
+                </p>
+         
+                <p>
+                    <strong>Description:</strong>
+                    <%= post.description %>
+                </p>
+
+                <!-- модель post связана с моделью like, в таблице likes есть столбец like используется для хранения информации о дизлайках(0),лайках(1) и null(ничего не выбрано). Значение true означает, что лайк является лайком, а значение false означает, что лайк является дизлайком -->
+                <p>
+                    <strong>Like:</strong>
+                    <%= 
+                        link_to post.likes.where(like: true).count, 
+                        like_post_path(post.id)
+                    %>
+
+                    <strong>Dislike:</strong>
+                    <%= link_to post.likes.where(like: false).count, dislike_post_path(post.id) %>
+                </p>
+        
+                <p>
+                    <strong>Comments:</strong>
+                    <%= post.comments.count %>
+                    <%= link_to 'Show comments', comments_path(post_id: post.id) %>
+                </p>
+
+            </div>
+            <p>
+                <%= link_to "Show this post", post %>
+            </p>
+        <% end %>
+    </div>
+
+<% else %>
+  <h1>Home</h1>
+  <%= link_to 'Sign in', new_user_session_path %>
+<% end %>
