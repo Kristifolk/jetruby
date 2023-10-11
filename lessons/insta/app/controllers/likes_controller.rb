@@ -1,14 +1,14 @@
 class LikesController < ApplicationController
-  before_action :set_like, only: %i[ show edit update destroy ]
+  before_action :set_like, only: %i[ update ] #%i[ show edit update destroy ] 
 
   # GET /likes or /likes.json
-  def index
-    @likes = Like.all
-  end
+#   def index
+#     @likes = Like.all
+#   end
 
   # GET /likes/1 or /likes/1.json
-  def show
-  end
+#   def show
+#   end
 
   
     def check_like     
@@ -44,13 +44,13 @@ class LikesController < ApplicationController
     end
 
   # GET /likes/new
-  def new
-    @like = Like.new
-  end
+#   def new
+#     @like = Like.new
+#   end
 
   # GET /likes/1/edit
-  def edit
-  end
+#   def edit
+#   end
 
   # POST /likes or /likes.json
   def create
@@ -81,14 +81,14 @@ class LikesController < ApplicationController
   end
 
   # DELETE /likes/1 or /likes/1.json
-  def destroy
-    @like.destroy
+#   def destroy
+#     @like.destroy
 
-    respond_to do |format|
-      format.html { redirect_to likes_url, notice: "Like was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+#     respond_to do |format|
+#       format.html { redirect_to likes_url, notice: "Like was successfully destroyed." }
+#       format.json { head :no_content }
+#     end
+#   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
