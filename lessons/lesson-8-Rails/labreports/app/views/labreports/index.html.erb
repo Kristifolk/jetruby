@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Labs reports</h1>
+
+
+<%= link_to "Add report", action: "new"  %>
+
+
+<div id="labreports">
+  <% @labreports.each do |labreport| %>
+    <%= render labreport %>
+    <% if labreport.grade == nil %>
+        <p>
+            <a href="/labreports/<%=labreport.id%>/mark">Add mark</a>
+            <%= link_to "Show this labreport", labreport %>
+        </p>
+    <% else %>
+        <p>
+            <strong>Mark: <%= labreport.grade %> </strong>
+            <%= link_to "Show this labreport", labreport %>
+        </p>
+    <% end %>
+  <% end %>
+</div>
+
+
